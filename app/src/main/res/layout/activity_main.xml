@@ -45,29 +45,215 @@
     </androidx.appcompat.widget.Toolbar>
 
 
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:visibility="visible">
+
+
+                <EditText
+                    android:id="@+id/fitId"
+                    android:layout_width="80dp"
+                    android:layout_height="60dp"
+                    android:background="@drawable/input_shape"
+                    android:gravity="center"
+                    android:hint="@string/ft"
+                    android:importantForAutofill="no"
+                    android:inputType="number"
+                    android:textColor="@color/teal_200"
+                    android:textSize="16sp" />
+
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:visibility="visible">
+
+
+                <EditText
+                    android:id="@+id/in"
+                    android:layout_width="80dp"
+                    android:layout_height="60dp"
+                    android:background="@drawable/input_shape"
+                    android:gravity="center"
+                    android:hint="@string/in"
+                    android:importantForAutofill="no"
+                    android:inputType="number"
+                    android:padding="5dp"
+                    android:textColor="@color/teal_200"
+                    android:textSize="16sp" />
+
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+        </LinearLayout>
+
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayout2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:visibility="visible">
+
+            <EditText
+                android:id="@+id/centimeter"
+                android:layout_width="80dp"
+                android:layout_height="60dp"
+                android:background="@drawable/input_shape"
+                android:gravity="center"
+                android:hint="@string/cm"
+                android:textColor="@color/teal_200" />
+
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+    </LinearLayout>
+
+
+
+
+
+
+
+
+    <Spinner
+        android:id="@+id/spinner_fit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="60dp"
+        android:entries="@array/category"
+        android:gravity="center"
+        android:prompt="@string/app_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/nweightId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+
+        <EditText
+            android:id="@+id/weightId"
+            android:layout_width="100dp"
+            android:layout_height="60dp"
+            android:background="@drawable/input_shape"
+            android:gravity="center"
+            android:hint="@string/weight"
+            android:importantForAutofill="no"
+            android:inputType="numberDecimal"
+            android:padding="5dp"
+            android:textColor="@color/teal_200"
+            android:textSize="16sp" />
+
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/lbsId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar">
-
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout">
 
         <EditText
-            android:id="@+id/fitId"
-            android:layout_width="80dp"
+            android:layout_width="100dp"
             android:layout_height="60dp"
             android:background="@drawable/input_shape"
-            android:gravity="center"
-            android:hint="@string/ft"
-            android:inputType="number"
+            android:hint="@string/pounds"
             android:textColor="@color/teal_200"
-            android:textSize="16sp"
-            android:importantForAutofill="no" />
+            android:textSize="16sp" />
 
 
     </com.google.android.material.textfield.TextInputLayout>
+
+
+    <Spinner
+        android:id="@+id/kg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="26dp"
+        android:entries="@array/WeightCategory"
+        app:layout_constraintBottom_toBottomOf="@+id/nweightId"
+        app:layout_constraintStart_toEndOf="@+id/nweightId"
+        app:layout_constraintTop_toTopOf="@+id/nweightId" />
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="50dp"
+        android:layout_marginTop="50dp"
+        android:background="@color/teal_200"
+        android:text="@string/click"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@+id/nweightId"
+        tools:layout_editor_absoluteX="50dp" />
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/button">
+
+
+        <TextView
+            android:id="@+id/bmi_Id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/_00_00"
+            android:textColor="@color/black"
+            android:textSize="32sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="@string/bmi"
+            android:textColor="@color/black"
+            android:textSize="32sp" />
+
+
+    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
