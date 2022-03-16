@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">BIM Application</string>
+    <string name="reset">RESET</string>
+    <string name="ft">ft</string>
+</resources>
