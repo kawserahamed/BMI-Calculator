@@ -15,6 +15,7 @@
     <string name="weight_kg">Weight kg</string>
     <string name="weight_lbs">Weight lbs</string>
     <string name="let_s_begin">Let\'s begin</string>
+    <string name="underweight">Underweight</string>
 
     <string-array name="category">
 
