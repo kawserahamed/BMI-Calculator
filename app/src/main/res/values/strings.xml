@@ -9,6 +9,12 @@
     <string name="bmi">BMI</string>
     <string name="click">Click</string>
     <string name="pounds">Pounds</string>
+    <string name="height_ft">Height ft</string>
+    <string name="height_in">Height In</string>
+    <string name="height_cm">Height cm</string>
+    <string name="weight_kg">Weight kg</string>
+    <string name="weight_lbs">Weight lbs</string>
+    <string name="let_s_begin">Let\'s begin</string>
 
     <string-array name="category">
 
