@@ -10,13 +10,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.bimapplication.databinding.ActivityMainBinding;
 
+import java.text.DecimalFormat;
+
 public class MainActivity extends AppCompatActivity {
     String spFt;
     String spKg;
     boolean heightCK;
     boolean weightCK;
     int fit;
-    int in;
+    float in = 0;
     float heightCm;
     float weightLbs;
     float weightKg;
@@ -37,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
         spFt = binding.spinnerFit.getSelectedItem().toString();
 
         spKg = binding.spinnerKg.getSelectedItem().toString();
+
+        DecimalFormat precision = new DecimalFormat("0.00");
 
         binding.reset.setOnClickListener(view -> {
 
@@ -137,41 +141,56 @@ public class MainActivity extends AppCompatActivity {
 
 
                 //height cm initialization
-                if (TextUtils.isEmpty(binding.heightFt.getText().toString()) && TextUtils.isEmpty(binding.heightIn.getText().toString())) {
-                    binding.heightFt.setError("can't be Empty");
-                    binding.heightFt.requestFocus();
-
-                    binding.heightIn.setError("can't be Empty");
-                    binding.heightIn.requestFocus();
+                if (TextUtils.isEmpty(binding.heightIn.getText().toString())) {
+                    in = 0;
                 } else {
-                    fit = Integer.parseInt(binding.heightFt.getText().toString());
-                    in = Integer.parseInt(binding.heightIn.getText().toString());
-                    totalMeter = (float) ((fit * 0.3048) + (in * 0.0254));
+                    in = Float.parseFloat(binding.heightIn.getText().toString());
                 }
 
+                if (TextUtils.isEmpty(binding.heightFt.getText().toString())) {
+                    binding.heightFt.setError("can't be Empty");
+                    binding.heightFt.requestFocus();
+                } else {
+                    fit = Integer.parseInt(binding.heightFt.getText().toString());
+                }
 
                 if (!TextUtils.isEmpty(binding.weightKg.getText().toString())) {
                     weightKg = Float.parseFloat(binding.weightKg.getText().toString());
                     totalWeight = weightKg;
+
                 } else {
-                    binding.weightKg.setError("can't be Empty");
+                    binding.weightKg.setError("can't be Empty or 0");
                     binding.weightKg.requestFocus();
                 }
 
+                if (fit == 0 || weightKg == 0) {
+                    binding.heightFt.setError("can't be 0");
+                    binding.weightKg.setError("can't be 0");
 
+                } else {
+
+                    totalMeter = (float) ((fit * 0.3048) + (in * 0.0254));
+                    sum = totalWeight / (totalMeter * totalMeter);
+                    BMI = String.valueOf(sum);
+
+                    // dblVariable is a number variable and not a String in this case
+                    binding.bmi.setText(precision.format(sum));
+
+                }
+
+               /* totalMeter = (float) ((fit * 0.3048) + (in * 0.0254));
                 sum = totalWeight / (totalMeter * totalMeter);
-                BMI = String.valueOf(sum);
-                binding.bmi.setText(BMI);
+                BMI = String.valueOf(sum);*/
 
 
             } else if (heightCK && !weightCK) {
 
-                if (!TextUtils.isEmpty(binding.heightCm.getText().toString())) {
+                if (!TextUtils.isEmpty(binding.heightCm.getText().toString()) && binding.heightCm.getText().equals(0)) {
                     heightCm = Float.parseFloat(binding.heightCm.getText().toString());
                     totalMeter = (float) (heightCm / 100);
 
                 } else {
-                    binding.heightCm.setError("can't be Empty");
+                    binding.heightCm.setError("can't be Empty or 0");
                     binding.heightCm.requestFocus();
                 }
 
@@ -179,22 +198,26 @@ public class MainActivity extends AppCompatActivity {
                     weightKg = Float.parseFloat(binding.weightKg.getText().toString());
                     totalWeight = weightKg;
                 } else {
-                    binding.weightKg.setError("can't be Empty");
+                    binding.weightKg.setError("can't be Empty or 0");
                     binding.weightKg.requestFocus();
                 }
 
 
                 sum = totalWeight / (totalMeter * totalMeter);
                 BMI = String.valueOf(sum);
-                binding.bmi.setText(BMI);
+                // dblVariable is a number variable and not a String in this case
+                binding.bmi.setText(precision.format(sum));
+
 
             } else if (!heightCK && weightCK) {
 
-                if (TextUtils.isEmpty(binding.heightFt.getText().toString()) && TextUtils.isEmpty(binding.heightIn.getText().toString())) {
-                    binding.heightFt.setError("can't be Empty");
+                if (TextUtils.isEmpty(binding.heightFt.getText().toString())
+                        && TextUtils.isEmpty(binding.heightIn.getText().toString())) {
+
+                    binding.heightFt.setError("can't be Empty or 0");
                     binding.heightFt.requestFocus();
 
-                    binding.heightIn.setError("can't be Empty");
+                    binding.heightIn.setError("can't be Empty or 0");
                     binding.heightIn.requestFocus();
                 } else {
                     fit = Integer.parseInt(binding.heightFt.getText().toString());
@@ -206,13 +229,15 @@ public class MainActivity extends AppCompatActivity {
                     weightLbs = Float.parseFloat(binding.weightLbs.getText().toString());
                     totalWeight = (float) (weightLbs / 2.20462);
                 } else {
-                    binding.weightLbs.setError("can't be Empty");
+                    binding.weightLbs.setError("can't be Empty or 0");
                     binding.weightLbs.requestFocus();
                 }
 
                 sum = totalWeight / (totalMeter * totalMeter);
                 BMI = String.valueOf(sum);
-                binding.bmi.setText(BMI);
+
+                // dblVariable is a number variable and not a String in this case
+                binding.bmi.setText(precision.format(sum));
 
 
             } else if (heightCK && !weightCK) {
@@ -221,7 +246,7 @@ public class MainActivity extends AppCompatActivity {
                     heightCm = Float.parseFloat(binding.heightCm.getText().toString());
                     totalMeter = (float) (heightCm / 100);
                 } else {
-                    binding.heightCm.setError("can't be Empty");
+                    binding.heightCm.setError("can't be Empty or 0");
                     binding.heightCm.requestFocus();
                 }
 
@@ -229,12 +254,14 @@ public class MainActivity extends AppCompatActivity {
                     weightLbs = Float.parseFloat(binding.weightLbs.getText().toString());
                     totalWeight = (float) (weightLbs / 2.20462);
                 } else {
-                    binding.weightLbs.setError("can't be Empty");
+                    binding.weightLbs.setError("can't be Empty or 0");
                     binding.weightLbs.requestFocus();
                 }
                 sum = totalWeight / (totalMeter * totalMeter);
                 BMI = String.valueOf(sum);
-                binding.bmi.setText(BMI);
+                // dblVariable is a number variable and not a String in this case
+                binding.bmi.setText(precision.format(sum));
+
 
             } else if (heightCK && weightCK) {
 
@@ -242,7 +269,7 @@ public class MainActivity extends AppCompatActivity {
                     heightCm = Float.parseFloat(binding.heightCm.getText().toString());
                     totalMeter = (float) (heightCm / 100);
                 } else {
-                    binding.heightCm.setError("can't be Empty");
+                    binding.heightCm.setError("can't be Empty or 0");
                     binding.heightCm.requestFocus();
                 }
 
@@ -250,44 +277,44 @@ public class MainActivity extends AppCompatActivity {
                     weightLbs = Float.parseFloat(binding.weightLbs.getText().toString());
                     totalWeight = (float) (weightLbs / 2.20462);
                 } else {
-                    binding.weightLbs.setError("can't be Empty");
+                    binding.weightLbs.setError("can't be Empty or 0");
                     binding.weightLbs.requestFocus();
                 }
                 sum = totalWeight / (totalMeter * totalMeter);
                 BMI = String.valueOf(sum);
-                binding.bmi.setText(BMI);
+                binding.bmi.setText(precision.format(sum));
             }
 
 
             if (Float.parseFloat(BMI) < 16.0) {
                 binding.comment.setText("Very Severely underweight");
-                binding.verySeverelyUnderweight.setBackgroundColor(getResources().getColor(R.color.layout_background));
+                binding.verySeverelyUnderweight.setBackgroundColor(getResources().getColor(R.color.Very_Severely_underweight));
             } else if (Float.parseFloat(BMI) > 16.0 && Float.parseFloat(BMI) < 16.9) {
                 binding.comment.setText("Severely underweight");
-                binding.severelyUnderweight.setBackgroundColor(getResources().getColor(R.color.layout_background));
+                binding.severelyUnderweight.setBackgroundColor(getResources().getColor(R.color.Severely_underweight));
             } else if (Float.parseFloat(BMI) > 17.0 && Float.parseFloat(BMI) < 18.4) {
                 binding.comment.setText("Underweight");
-                binding.underweight.setBackgroundColor(getResources().getColor(R.color.layout_background));
+                binding.underweight.setBackgroundColor(getResources().getColor(R.color.Underweight));
 
             } else if (Float.parseFloat(BMI) > 18.5 && Float.parseFloat(BMI) < 24.9) {
                 binding.comment.setText("Healthy");
-                binding.healthy.setBackgroundColor(getResources().getColor(R.color.layout_background));
+                binding.healthy.setBackgroundColor(getResources().getColor(R.color.Healthy));
 
             } else if (Float.parseFloat(BMI) > 25.0 && Float.parseFloat(BMI) < 29.9) {
                 binding.comment.setText("Overweight");
-                binding.overweight.setBackgroundColor(getResources().getColor(R.color.layout_background));
+                binding.overweight.setBackgroundColor(getResources().getColor(R.color.Overweight));
 
             } else if (Float.parseFloat(BMI) > 30.0 && Float.parseFloat(BMI) < 34.9) {
                 binding.comment.setText("Obese Class I");
-                binding.obeseClassI.setBackgroundColor(getResources().getColor(R.color.layout_background));
+                binding.obeseClassI.setBackgroundColor(getResources().getColor(R.color.Obese_Class_I));
 
             } else if (Float.parseFloat(BMI) > 35.0 && Float.parseFloat(BMI) < 39.9) {
                 binding.comment.setText("Obese Class II");
-                binding.obeseClassIi.setBackgroundColor(getResources().getColor(R.color.layout_background));
+                binding.obeseClassIi.setBackgroundColor(getResources().getColor(R.color.Obese_Class_ii));
 
             } else if (Float.parseFloat(BMI) >= 40.0) {
                 binding.comment.setText("Obese Class III");
-                binding.obeseClassIii.setBackgroundColor(getResources().getColor(R.color.layout_background));
+                binding.obeseClassIii.setBackgroundColor(getResources().getColor(R.color.Obese_Class_iii));
             }
 
         });

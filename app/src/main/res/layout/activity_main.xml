@@ -12,7 +12,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/teal_200"
+        android:background="@color/background"
         app:layout_constraintTop_toTopOf="parent">
 
 
@@ -27,7 +27,7 @@
                 android:layout_marginEnd="16dp"
                 android:gravity="center_vertical"
                 android:text="@string/body_mass_index_bmi"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -39,7 +39,7 @@
                 android:layout_marginEnd="16dp"
                 android:gravity="center_vertical"
                 android:text="@string/reset"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 tools:ignore="RelativeOverlap" />
@@ -113,7 +113,7 @@
                         android:gravity="center"
                         android:hint="@string/height_in"
                         android:importantForAutofill="no"
-                        android:inputType="number"
+                        android:inputType="numberDecimal"
                         android:padding="15dp"
                         android:textColor="@color/black"
                         android:textSize="20sp"
@@ -182,7 +182,7 @@
                 <soup.neumorphism.NeumorphCardView
                     android:id="@+id/weightKg_layout"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:visibility="visible"
                     app:neumorph_shapeType="pressed">
 
@@ -256,13 +256,13 @@
                 android:layout_marginTop="20dp"
                 android:gravity="center"
                 android:text="@string/let_s_begin"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/weightType"
-                app:neumorph_backgroundColor="@color/teal_200"
+                app:neumorph_backgroundColor="@color/background"
                 app:neumorph_shapeType="flat" />
 
 
@@ -330,16 +330,16 @@
 
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/cardView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="20dp"
-                android:layout_marginBottom="30dp"
                 android:orientation="vertical"
                 app:cardCornerRadius="10dp"
                 app:cardElevation="20dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/neumorphCardView2">
+                app:layout_constraintTop_toBottomOf="@+id/neumorphCardView2"
+                tools:layout_editor_absoluteX="16dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -544,6 +544,18 @@
 
 
             </androidx.cardview.widget.CardView>
+
+            <TextView
+
+                android:textSize="12sp"
+                android:layout_marginBottom="30dp"
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Powered by Prime IT"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardView" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
