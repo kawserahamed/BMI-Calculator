@@ -7,7 +7,6 @@
     android:background="@color/def"
     tools:context=".MainActivity">
 
-
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -15,9 +14,7 @@
         android:background="@color/background"
         app:layout_constraintTop_toTopOf="parent">
 
-
         <RelativeLayout
-
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -43,8 +40,8 @@
                 android:textSize="16sp"
                 android:textStyle="bold"
                 tools:ignore="RelativeOverlap" />
-        </RelativeLayout>
 
+        </RelativeLayout>
 
     </androidx.appcompat.widget.Toolbar>
 
@@ -61,7 +58,6 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
 
             <LinearLayout
                 android:id="@+id/heightType"
@@ -130,7 +126,6 @@
                     app:neumorph_shapeType="pressed">
 
                     <EditText
-                        android:padding="15dp"
                         android:id="@+id/height_cm"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -140,12 +135,11 @@
                         android:hint="@string/height_cm"
                         android:importantForAutofill="no"
                         android:inputType="numberDecimal"
+                        android:padding="15dp"
                         android:textColor="@color/black"
                         android:textSize="20sp" />
 
-
                 </soup.neumorphism.NeumorphCardView>
-
 
             </LinearLayout>
 
@@ -154,8 +148,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:layout_marginTop="20dp"
                 android:padding="10dp"
+                app:layout_constraintBottom_toBottomOf="@+id/heightType"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/heightType"
                 app:neumorph_shapeType="flat">
@@ -167,9 +161,7 @@
                     android:entries="@array/category"
                     android:padding="8dp" />
 
-
             </soup.neumorphism.NeumorphCardView>
-
 
             <LinearLayout
                 android:id="@+id/weightType"
@@ -210,7 +202,6 @@
                     app:neumorph_shapeType="pressed">
 
                     <EditText
-                        android:padding="15dp"
                         android:id="@+id/weight_lbs"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -219,6 +210,7 @@
                         android:hint="@string/weight_lbs"
                         android:importantForAutofill="no"
                         android:inputType="numberDecimal"
+                        android:padding="15dp"
                         android:textColor="@color/black"
                         android:textSize="20sp" />
 
@@ -230,12 +222,11 @@
             <soup.neumorphism.NeumorphCardView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
                 android:padding="10dp"
+                app:layout_constraintBottom_toBottomOf="@+id/weightType"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/heightType"
                 app:neumorph_shapeType="flat">
-
 
                 <Spinner
                     android:id="@+id/spinnerKg"
@@ -243,7 +234,6 @@
                     android:layout_height="wrap_content"
                     android:entries="@array/WeightCategory"
                     android:padding="8dp" />
-
 
             </soup.neumorphism.NeumorphCardView>
 
@@ -265,7 +255,6 @@
                 app:neumorph_backgroundColor="@color/background"
                 app:neumorph_shapeType="flat" />
 
-
             <soup.neumorphism.NeumorphCardView
                 android:id="@+id/neumorphCardView2"
                 android:layout_width="match_parent"
@@ -276,13 +265,12 @@
                 app:neumorph_shapeType="flat"
                 tools:layout_editor_absoluteX="10dp">
 
-
                 <LinearLayout
-                    android:padding="15dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:padding="10dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -294,6 +282,7 @@
                             android:id="@+id/bmi"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:includeFontPadding="false"
                             android:text="@string/_00_00"
                             android:textColor="@color/black"
                             android:textSize="40sp"
@@ -303,31 +292,27 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="10dp"
+                            android:includeFontPadding="false"
                             android:text="@string/bmi"
                             android:textColor="@color/black"
                             android:textSize="40sp"
                             android:textStyle="bold" />
 
-
                     </LinearLayout>
-
 
                     <TextView
                         android:id="@+id/comment"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="5dp"
                         android:gravity="center"
                         android:text=""
                         android:textColor="@color/black"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
-
+                        android:textSize="18sp" />
 
                 </LinearLayout>
 
             </soup.neumorphism.NeumorphCardView>
-
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView"
@@ -344,15 +329,16 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="20dp">
+                    android:orientation="vertical">
 
                     <LinearLayout
                         android:id="@+id/very_severely_underweight"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:padding="10dp">
+                        android:paddingHorizontal="20dp"
+                        android:paddingTop="20dp"
+                        android:paddingBottom="10dp">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -376,7 +362,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:padding="10dp">
+                        android:paddingHorizontal="20dp"
+                        android:paddingVertical="10dp">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -400,7 +387,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:padding="10dp">
+                        android:paddingHorizontal="20dp"
+                        android:paddingVertical="10dp">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -424,7 +412,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:padding="10dp">
+                        android:paddingHorizontal="20dp"
+                        android:paddingVertical="10dp">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -448,7 +437,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:padding="10dp">
+                        android:paddingHorizontal="20dp"
+                        android:paddingVertical="10dp">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -472,7 +462,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:padding="10dp">
+                        android:paddingHorizontal="20dp"
+                        android:paddingVertical="10dp">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -496,7 +487,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:padding="10dp">
+                        android:paddingHorizontal="20dp"
+                        android:paddingVertical="10dp">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -520,7 +512,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:padding="10dp">
+                        android:paddingHorizontal="20dp"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="20dp">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -539,7 +533,6 @@
 
                     </LinearLayout>
 
-
                 </LinearLayout>
 
 
@@ -547,19 +540,18 @@
 
             <TextView
 
-                android:textSize="12sp"
-                android:layout_marginBottom="30dp"
-                android:layout_marginTop="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="30dp"
                 android:gravity="center"
-                android:text="Powered by Prime IT"
+                android:text="@string/powered_by_prime_it"
+                android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cardView" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
 
     </ScrollView>
 
