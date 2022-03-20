@@ -47,8 +47,18 @@ public class MainActivity extends AppCompatActivity {
             binding.heightIn.setText("");
             binding.weightKg.setText("");
             binding.weightLbs.setText("");
-            binding.bmi.setText("0.00");
+            binding.bmi.setText(R.string._00_00);
             binding.comment.setText("");
+            sum = 0;
+
+            fit = 0;
+            in = 0;
+            heightCm = 0;
+            weightLbs = 0;
+            weightKg = 0;
+            sum = 0;
+            totalMeter = 0;
+            totalWeight = 0;
 
             //Chart Background set null
             binding.verySeverelyUnderweight.setBackgroundColor(getResources().getColor(R.color.white));
@@ -118,9 +128,8 @@ public class MainActivity extends AppCompatActivity {
             binding.obeseClassI.setBackgroundColor(getResources().getColor(R.color.white));
             binding.obeseClassIi.setBackgroundColor(getResources().getColor(R.color.white));
             binding.obeseClassIii.setBackgroundColor(getResources().getColor(R.color.white));
-            binding.bmi.setText("0.00");
+            binding.bmi.setText(R.string._00_00);
             binding.comment.setText("");
-
             sum = 0;
 
 
@@ -168,7 +177,7 @@ public class MainActivity extends AppCompatActivity {
                     totalMeter = heightCm / 100;
 
                 } else {
-                    binding.heightCm.setError("Can't be Empty");
+                    binding.heightCm.setError("This Field Can't be Empty");
                     binding.heightCm.requestFocus();
                 }
 
@@ -176,7 +185,7 @@ public class MainActivity extends AppCompatActivity {
                     weightKg = Float.parseFloat(binding.weightKg.getText().toString());
                     totalWeight = weightKg;
                 } else {
-                    binding.weightKg.setError("Can't be Empty");
+                    binding.weightKg.setError("This Field Can't be Empty");
                     binding.weightKg.requestFocus();
                 }
 
@@ -193,25 +202,24 @@ public class MainActivity extends AppCompatActivity {
 
             } else if (!heightCK && weightCK) {
 
-                if (TextUtils.isEmpty(binding.heightFt.getText().toString())
-                        && TextUtils.isEmpty(binding.heightIn.getText().toString())) {
+                if (TextUtils.isEmpty(binding.heightIn.getText().toString())) {
+                    in = 0;
+                } else {
+                    in = Float.parseFloat(binding.heightIn.getText().toString());
+                }
 
-                    binding.heightFt.setError("Can't be Empty");
+                if (TextUtils.isEmpty(binding.heightFt.getText().toString())) {
+                    binding.heightFt.setError("This Field Can't be Empty");
                     binding.heightFt.requestFocus();
-
-                    binding.heightIn.setError("Can't be Empty");
-                    binding.heightIn.requestFocus();
                 } else {
                     fit = Integer.parseInt(binding.heightFt.getText().toString());
-                    in = Integer.parseInt(binding.heightIn.getText().toString());
-                    totalMeter = (float) ((fit * 0.3048) + (in * 0.0254));
                 }
 
                 if (!TextUtils.isEmpty(binding.weightLbs.getText().toString())) {
                     weightLbs = Float.parseFloat(binding.weightLbs.getText().toString());
                     totalWeight = (float) (weightLbs * 0.453592);
                 } else {
-                    binding.weightLbs.setError("Can't be Empty");
+                    binding.weightLbs.setError("This Field Can't be Empty");
                     binding.weightLbs.requestFocus();
                 }
 
@@ -230,7 +238,7 @@ public class MainActivity extends AppCompatActivity {
                     heightCm = Float.parseFloat(binding.heightCm.getText().toString());
                     totalMeter = heightCm / 100;
                 } else {
-                    binding.heightCm.setError("Can't be Empty");
+                    binding.heightCm.setError("This Field Can't be Empty");
                     binding.heightCm.requestFocus();
                 }
 
@@ -238,7 +246,7 @@ public class MainActivity extends AppCompatActivity {
                     weightLbs = Float.parseFloat(binding.weightLbs.getText().toString());
                     totalWeight = (float) (weightLbs * 0.453592);
                 } else {
-                    binding.weightLbs.setError("Can't be Empty");
+                    binding.weightLbs.setError("This Field Can't be Empty");
                     binding.weightLbs.requestFocus();
                 }
 
@@ -258,7 +266,7 @@ public class MainActivity extends AppCompatActivity {
                     heightCm = Float.parseFloat(binding.heightCm.getText().toString());
                     totalMeter = heightCm / 100;
                 } else {
-                    binding.heightCm.setError("Can't be Empty");
+                    binding.heightCm.setError("This Field Can't be Empty");
                     binding.heightCm.requestFocus();
                 }
 
@@ -266,7 +274,7 @@ public class MainActivity extends AppCompatActivity {
                     weightLbs = Float.parseFloat(binding.weightLbs.getText().toString());
                     totalWeight = (float) (weightLbs * 0.453592);
                 } else {
-                    binding.weightLbs.setError("Can't be Empty");
+                    binding.weightLbs.setError("This Field Can't be Empty");
                     binding.weightLbs.requestFocus();
                 }
                 if (heightCm == 0 || weightLbs == 0) {
