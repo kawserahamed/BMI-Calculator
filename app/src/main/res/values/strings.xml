@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">BMI Application</string>
+    <string name="app_name">BMI Calculator</string>
     <string name="reset">RESET</string>
     <string name="ft">ft</string>
     <string name="in">in</string>

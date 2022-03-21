@@ -1,4 +1,4 @@
-package com.example.bimapplication;
+package org.primeit.bmicalculator;
 
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -7,7 +7,8 @@ import android.widget.AdapterView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.bimapplication.databinding.ActivityMainBinding;
+
+import org.primeit.bmicalculator.databinding.ActivityMainBinding;
 
 import java.text.DecimalFormat;
 
@@ -33,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        setTheme(R.style.Theme_BIMApplication);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
