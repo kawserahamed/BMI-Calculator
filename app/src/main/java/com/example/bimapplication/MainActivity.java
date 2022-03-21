@@ -286,7 +286,7 @@ public class MainActivity extends AppCompatActivity {
     private void findRecommended() {
 
         if (sum < 18.5) {
-            for (float i = 1; i < 100; i++) {
+            for (int i = 1; i < 100; i++) {
                 float newWeight = totalWeight + i;
                 newSum = newWeight / (totalMeter * totalMeter);
                 if (newSum >= 18.5) {
