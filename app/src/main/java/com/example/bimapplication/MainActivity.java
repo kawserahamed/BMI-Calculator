@@ -62,9 +62,7 @@ public class MainActivity extends AppCompatActivity {
             totalWeight = 0;
             newSum = 0;
             strWeight = "";
-            binding.weightNeed.setText(null);
-            binding.showKg.setText(null);
-            binding.reCommand.setText(null);
+            binding.commentLayout.setVisibility(View.GONE);
 
             //Chart Background set null
             binding.verySeverelyUnderweight.setBackgroundColor(getResources().getColor(R.color.white));
@@ -139,14 +137,13 @@ public class MainActivity extends AppCompatActivity {
             sum = 0;
             newSum = 0;
             strWeight = "";
+            binding.commentLayout.setVisibility(View.GONE);
 
 
             // for height CM and Weight KG     And Height Ft and Weight KG
-
             if (!heightCK && weightCK) {
                 String cm = binding.heightCm.getText().toString();
                 String kg = binding.weightKg.getText().toString();
-
                 if (TextUtils.isEmpty(kg)) {
                     binding.weightKg.setError("This Field Can't be Empty or 0");
                 } else {
@@ -162,8 +159,6 @@ public class MainActivity extends AppCompatActivity {
                     binding.heightCm.setError("This Field Can't be Empty or 0");
                 } else {
                     heightCm = Float.parseFloat(binding.heightCm.getText().toString());
-
-
                     if (heightCm == 0 || weightKg == 0) {
                         binding.heightCm.setError("This Field Can't be Empty or 0");
                     } else {
@@ -175,11 +170,9 @@ public class MainActivity extends AppCompatActivity {
 
 
             } else if (heightCK && !weightCK) {
-
                 String str_in = binding.heightIn.getText().toString();
                 String str_ft = binding.heightFt.getText().toString();
                 String str_lbs = binding.weightLbs.getText().toString();
-
                 if (TextUtils.isEmpty(str_in)) {
                     in = 0;
                 } else {
@@ -195,7 +188,6 @@ public class MainActivity extends AppCompatActivity {
                         totalWeight = (float) (weightLbs * 0.453592);
                     }
                 }
-
                 if (TextUtils.isEmpty(str_ft)) {
                     binding.heightFt.setError("This Field Can't be Empty or 0");
                 } else {
@@ -208,8 +200,6 @@ public class MainActivity extends AppCompatActivity {
                         binding.bmi.setText(precision.format(sum));
                     }
                 }
-
-
             } else if (!heightCK && !weightCK) {
 
                 String str_cm = binding.heightCm.getText().toString();
@@ -234,18 +224,14 @@ public class MainActivity extends AppCompatActivity {
                         binding.heightCm.setError("This Field Can't be Empty or 0");
                     } else {
                         totalMeter = heightCm / 100;
-
                         sum = totalWeight / (totalMeter * totalMeter);
                         binding.bmi.setText(precision.format(sum));
                     }
                 }
-
-
             } else if (heightCK && weightCK) {
                 String str_in = binding.heightIn.getText().toString();
                 String str_ft = binding.heightFt.getText().toString();
                 String str_kg = binding.weightKg.getText().toString();
-
                 if (TextUtils.isEmpty(str_in)) {
                     in = 0;
                 } else {
@@ -272,25 +258,23 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
             }
-
             if (sum > 0) {
                 setMessageBackground();
                 findRecommended();
             }
 
         });
-
-
     }
 
     private void findRecommended() {
 
-        if (sum < 18.5) {
+        if (sum < 18.50) {
             for (int i = 1; i < 100; i++) {
                 float newWeight = totalWeight + i;
                 newSum = newWeight / (totalMeter * totalMeter);
                 if (newSum >= 18.5) {
                     strWeight = String.valueOf(i);
+                    binding.commentLayout.setVisibility(View.VISIBLE);
                     binding.weightNeed.setText(R.string.need_healthy);
                     binding.showKg.setText(R.string.kg);
                     binding.reCommand.setText(strWeight);
@@ -298,12 +282,13 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
 
-        } else if (sum > 24.9) {
+        } else if (sum > 24.90) {
             for (int i = 1; i < 150; i++) {
                 float newWeight = totalWeight - i;
                 newSum = newWeight / (totalMeter * totalMeter);
                 if (newSum <= 24.9) {
                     strWeight = String.valueOf(i);
+                    binding.commentLayout.setVisibility(View.VISIBLE);
                     binding.weightNeed.setText(R.string.lose_healthy);
                     binding.showKg.setText(R.string.kg);
                     binding.reCommand.setText(strWeight);
@@ -311,10 +296,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         } else {
-            binding.weightNeed.setText(null);
-            binding.showKg.setText(null);
             strWeight = String.valueOf(0);
-            binding.reCommand.setText(null);
         }
     }
 
@@ -322,26 +304,26 @@ public class MainActivity extends AppCompatActivity {
         if (sum < 16.0) {
             binding.comment.setText(R.string.very_severely_underweight);
             binding.verySeverelyUnderweight.setBackgroundColor(getResources().getColor(R.color.Very_Severely_underweight));
-        } else if (sum > 16.0 && sum < 16.9) {
+        } else if (sum >= 16.0 && sum <= 16.99) {
             binding.comment.setText(R.string.severely_underweight);
             binding.severelyUnderweight.setBackgroundColor(getResources().getColor(R.color.Severely_underweight));
-        } else if (sum > 17.0 && sum < 18.4) {
+        } else if (sum >= 17.0 && sum <= 18.49) {
             binding.comment.setText(R.string.underweight);
             binding.underweight.setBackgroundColor(getResources().getColor(R.color.Underweight));
 
-        } else if (sum > 18.5 && sum < 24.9) {
+        } else if (sum >= 18.5 && sum <= 24.99) {
             binding.comment.setText(R.string.healthy);
             binding.healthy.setBackgroundColor(getResources().getColor(R.color.Healthy));
 
-        } else if (sum > 25.0 && sum < 29.9) {
+        } else if (sum >= 25.0 && sum <= 29.99) {
             binding.comment.setText(R.string.overweight);
             binding.overweight.setBackgroundColor(getResources().getColor(R.color.Overweight));
 
-        } else if (sum > 30.0 && sum < 34.9) {
+        } else if (sum >= 30.0 && sum <= 34.99) {
             binding.comment.setText(R.string.obese_class_i);
             binding.obeseClassI.setBackgroundColor(getResources().getColor(R.color.Obese_Class_I));
 
-        } else if (sum > 35.0 && sum < 39.9) {
+        } else if (sum >= 35.0 && sum <= 39.99) {
             binding.comment.setText(R.string.obese_class_ii);
             binding.obeseClassIi.setBackgroundColor(getResources().getColor(R.color.Obese_Class_ii));
 
