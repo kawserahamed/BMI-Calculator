@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -24,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     float sum = 0;
     float totalMeter = 0;
     float totalWeight = 0;
+
 
     ActivityMainBinding binding;
 
@@ -290,10 +292,39 @@ public class MainActivity extends AppCompatActivity {
 
             if (sum > 0) {
                 setMessageBackground();
+                findRecommended();
             }
 
         });
 
+
+    }
+
+    private void findRecommended() {
+
+       float newSum = 0;
+
+
+        if (sum<18.5){
+
+            for (float i=1; i<100;i++){
+                newSum = totalWeight+i / (totalMeter * totalMeter);
+                if (newSum>=18.5){
+                    break;
+                }
+            }
+
+        }else if (sum>24.9){
+            for (int i=100; i<=1;i--){
+                newSum = totalWeight+i / (totalMeter * totalMeter);
+                if (newSum<=24.9){
+                    break;
+                }
+            }
+        }
+
+        String strNewSum= String.valueOf(newSum);
+        Toast.makeText(this,strNewSum, Toast.LENGTH_SHORT).show();
 
     }
 
