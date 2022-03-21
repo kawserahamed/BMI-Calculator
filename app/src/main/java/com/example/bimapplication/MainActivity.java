@@ -1,6 +1,7 @@
 package com.example.bimapplication;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 
@@ -143,70 +144,133 @@ public class MainActivity extends AppCompatActivity {
             // for height CM and Weight KG     And Height Ft and Weight KG
 
             if (!heightCK && weightCK) {
-                heightCm = Float.parseFloat(binding.heightCm.getText().toString());
-                totalMeter = heightCm / 100;
-                weightKg = Float.parseFloat(binding.weightKg.getText().toString());
-                totalWeight = weightKg;
+                String cm = binding.heightCm.getText().toString();
+                String kg = binding.weightKg.getText().toString();
 
-                if (heightCm == 0 || weightKg == 0) {
+                if (TextUtils.isEmpty(kg)) {
                     binding.weightKg.setError("This Field Can't be Empty or 0");
-                    binding.heightCm.setError("This Field Can't be Empty or 0");
-                    binding.weightKg.requestFocus();
                 } else {
-                    sum = totalWeight / (totalMeter * totalMeter);
-                    binding.bmi.setText(precision.format(sum));
+                    weightKg = Float.parseFloat(binding.weightKg.getText().toString());
+                    if (weightKg == 0) {
+                        binding.weightKg.setError("This Field Can't be Empty or 0");
+                    } else {
+                        totalWeight = weightKg;
+                    }
+                }
+
+                if (TextUtils.isEmpty(cm)) {
+                    binding.heightCm.setError("This Field Can't be Empty or 0");
+                } else {
+                    heightCm = Float.parseFloat(binding.heightCm.getText().toString());
+
+
+                    if (heightCm == 0 || weightKg == 0) {
+                        binding.heightCm.setError("This Field Can't be Empty or 0");
+                    } else {
+                        totalMeter = heightCm / 100;
+                        sum = totalWeight / (totalMeter * totalMeter);
+                        binding.bmi.setText(precision.format(sum));
+                    }
                 }
 
 
             } else if (heightCK && !weightCK) {
 
-                in = Float.parseFloat(binding.heightIn.getText().toString());
-                fit = Integer.parseInt(binding.heightFt.getText().toString());
-                weightLbs = Float.parseFloat(binding.weightLbs.getText().toString());
-                totalWeight = (float) (weightLbs * 0.453592);
-                if (fit == 0 || weightLbs == 0) {
-                    binding.weightLbs.setError("This Field Can't be Empty or 0");
-                    binding.heightFt.setError("This Field Can't be Empty or 0");
-                    binding.weightKg.requestFocus();
+                String str_in = binding.heightIn.getText().toString();
+                String str_ft = binding.heightFt.getText().toString();
+                String str_lbs = binding.weightLbs.getText().toString();
+
+                if (TextUtils.isEmpty(str_in)) {
+                    in = 0;
                 } else {
-                    sum = totalWeight / (totalMeter * totalMeter);
-                    binding.bmi.setText(precision.format(sum));
+                    in = Float.parseFloat(binding.heightIn.getText().toString());
+                }
+                if (TextUtils.isEmpty(str_lbs)) {
+                    binding.weightLbs.setError("This Field Can't be Empty or 0");
+                } else {
+                    weightLbs = Float.parseFloat(binding.weightLbs.getText().toString());
+                    if (weightLbs == 0) {
+                        binding.weightLbs.setError("This Field Can't be Empty or 0");
+                    } else {
+                        totalWeight = (float) (weightLbs * 0.453592);
+                    }
+                }
+
+                if (TextUtils.isEmpty(str_ft)) {
+                    binding.heightFt.setError("This Field Can't be Empty or 0");
+                } else {
+                    fit = Integer.parseInt(binding.heightFt.getText().toString());
+                    if (fit == 0) {
+                        binding.heightFt.setError("This Field Can't be Empty or 0");
+                    } else {
+                        totalMeter = (float) ((fit * 0.3048) + (in * 0.0254));
+                        sum = totalWeight / (totalMeter * totalMeter);
+                        binding.bmi.setText(precision.format(sum));
+                    }
                 }
 
 
             } else if (!heightCK && !weightCK) {
 
-                heightCm = Float.parseFloat(binding.heightCm.getText().toString());
-                totalMeter = heightCm / 100;
-                weightLbs = Float.parseFloat(binding.weightLbs.getText().toString());
-                totalWeight = (float) (weightLbs * 0.453592);
+                String str_cm = binding.heightCm.getText().toString();
+                String str_lbs = binding.weightLbs.getText().toString();
 
-                if (heightCm == 0 || weightLbs == 0) {
-                    binding.heightCm.setError("This Field Can't be Empty or 0");
+                if (TextUtils.isEmpty(str_lbs)) {
                     binding.weightLbs.setError("This Field Can't be Empty or 0");
-                    binding.weightKg.requestFocus();
-
                 } else {
-                    sum = totalWeight / (totalMeter * totalMeter);
-                    binding.bmi.setText(precision.format(sum));
+                    weightLbs = Float.parseFloat(binding.weightLbs.getText().toString());
+                    if (weightLbs == 0) {
+                        binding.weightLbs.setError("This Field Can't be Empty or 0");
+                    } else {
+                        totalWeight = (float) (weightLbs * 0.453592);
+                    }
+                }
+                if (TextUtils.isEmpty(str_cm)) {
+                    binding.heightCm.setError("This Field Can't be Empty or 0");
+                } else {
+                    heightCm = Float.parseFloat(binding.heightCm.getText().toString());
+
+                    if (heightCm == 0) {
+                        binding.heightCm.setError("This Field Can't be Empty or 0");
+                    } else {
+                        totalMeter = heightCm / 100;
+
+                        sum = totalWeight / (totalMeter * totalMeter);
+                        binding.bmi.setText(precision.format(sum));
+                    }
                 }
 
-            } else {
-                //height cm initialization
-                in = Float.parseFloat(binding.heightIn.getText().toString());
-                fit = Integer.parseInt(binding.heightFt.getText().toString());
-                weightKg = Float.parseFloat(binding.weightKg.getText().toString());
 
-                if (fit == 0 || weightKg == 0) {
-                    binding.heightFt.setError("This Field Can't be Empty or 0");
+            } else if (heightCK && weightCK) {
+                String str_in = binding.heightIn.getText().toString();
+                String str_ft = binding.heightFt.getText().toString();
+                String str_kg = binding.weightKg.getText().toString();
+
+                if (TextUtils.isEmpty(str_in)) {
+                    in = 0;
+                } else {
+                    in = Float.parseFloat(binding.heightIn.getText().toString());
+                }
+                if (TextUtils.isEmpty(str_kg)) {
                     binding.weightKg.setError("This Field Can't be Empty or 0");
-                    binding.weightKg.requestFocus();
                 } else {
-                    totalMeter = (float) ((fit * 0.3048) + (in * 0.0254));
-                    sum = weightKg / (totalMeter * totalMeter);
-                    binding.bmi.setText(precision.format(sum));
+                    totalWeight = Float.parseFloat(binding.weightKg.getText().toString());
+                    if (totalWeight == 0) {
+                        binding.weightKg.setError("This Field Can't be Empty or 0");
+                    }
                 }
-
+                if (TextUtils.isEmpty(str_ft)) {
+                    binding.heightFt.setError("This Field Can't be Empty or 0");
+                } else {
+                    fit = Integer.parseInt(binding.heightFt.getText().toString());
+                    if (fit == 0) {
+                        binding.heightFt.setError("This Field Can't be Empty or 0");
+                    } else {
+                        totalMeter = (float) ((fit * 0.3048) + (in * 0.0254));
+                        sum = totalWeight / (totalMeter * totalMeter);
+                        binding.bmi.setText(precision.format(sum));
+                    }
+                }
             }
 
             if (sum > 0) {
@@ -220,8 +284,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void findRecommended() {
-        if (sum < 18.5) {
 
+        if (sum < 18.5) {
             for (float i = 1; i < 100; i++) {
                 float newWeight = totalWeight + i;
                 newSum = newWeight / (totalMeter * totalMeter);
