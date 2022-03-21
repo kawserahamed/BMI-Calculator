@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -25,6 +24,8 @@ public class MainActivity extends AppCompatActivity {
     float sum = 0;
     float totalMeter = 0;
     float totalWeight = 0;
+    float newSum = 0;
+    String strWeight = "";
 
 
     ActivityMainBinding binding;
@@ -52,7 +53,6 @@ public class MainActivity extends AppCompatActivity {
             binding.bmi.setText(R.string._00_00);
             binding.comment.setText("");
             sum = 0;
-
             fit = 0;
             in = 0;
             heightCm = 0;
@@ -61,6 +61,10 @@ public class MainActivity extends AppCompatActivity {
             sum = 0;
             totalMeter = 0;
             totalWeight = 0;
+            newSum = 0;
+            strWeight = "";
+            binding.weightLose.setVisibility(View.GONE);
+            binding.showKg.setVisibility(View.GONE);
 
             //Chart Background set null
             binding.verySeverelyUnderweight.setBackgroundColor(getResources().getColor(R.color.white));
@@ -133,6 +137,10 @@ public class MainActivity extends AppCompatActivity {
             binding.bmi.setText(R.string._00_00);
             binding.comment.setText("");
             sum = 0;
+            newSum = 0;
+            strWeight = "";
+            binding.weightLose.setVisibility(View.GONE);
+            binding.showKg.setVisibility(View.GONE);
 
 
             // for height CM and Weight KG     And Height Ft and Weight KG
@@ -174,7 +182,7 @@ public class MainActivity extends AppCompatActivity {
 
             } else if (heightCK && !weightCK) {
 
-                if (!TextUtils.isEmpty(binding.heightCm.getText().toString()) && binding.heightCm.getText().equals(0)) {
+                if (!TextUtils.isEmpty(binding.heightCm.getText().toString())) {
                     heightCm = Float.parseFloat(binding.heightCm.getText().toString());
                     totalMeter = heightCm / 100;
 
@@ -236,12 +244,12 @@ public class MainActivity extends AppCompatActivity {
 
             } else if (heightCK && !weightCK) {
 
-                if (!TextUtils.isEmpty(binding.heightCm.getText().toString())) {
-                    heightCm = Float.parseFloat(binding.heightCm.getText().toString());
-                    totalMeter = heightCm / 100;
-                } else {
+                if (TextUtils.isEmpty(binding.heightCm.getText().toString())) {
                     binding.heightCm.setError("This Field Can't be Empty");
                     binding.heightCm.requestFocus();
+                } else {
+                    heightCm = Float.parseFloat(binding.heightCm.getText().toString());
+                    totalMeter = heightCm / 100;
                 }
 
                 if (!TextUtils.isEmpty(binding.weightLbs.getText().toString())) {
@@ -301,31 +309,39 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void findRecommended() {
+        if (sum < 18.5) {
 
-       float newSum = 0;
-
-
-        if (sum<18.5){
-
-            for (float i=1; i<100;i++){
-                newSum = totalWeight+i / (totalMeter * totalMeter);
-                if (newSum>=18.5){
+            for (float i = 1; i < 100; i++) {
+                float newWeight = totalWeight + i;
+                newSum = newWeight / (totalMeter * totalMeter);
+                if (newSum >= 18.5) {
+                    strWeight = String.valueOf(i);
+                    binding.weightNeed.setVisibility(View.VISIBLE);
+                    binding.showKg.setVisibility(View.VISIBLE);
+                    binding.reCommand.setText(strWeight);
                     break;
                 }
             }
 
-        }else if (sum>24.9){
-            for (int i=100; i<=1;i--){
-                newSum = totalWeight+i / (totalMeter * totalMeter);
-                if (newSum<=24.9){
+        } else if (sum > 24.9) {
+            for (int i = 1; i < 150; i++) {
+                float newWeight = totalWeight - i;
+                newSum = newWeight / (totalMeter * totalMeter);
+                if (newSum <= 24.9) {
+                    strWeight = String.valueOf(i);
+                    binding.weightLose.setVisibility(View.VISIBLE);
+                    binding.showKg.setVisibility(View.VISIBLE);
+                    binding.reCommand.setText(strWeight);
                     break;
                 }
             }
+        } else {
+            binding.weightNeed.setText(null);
+            binding.weightLose.setText(null);
+            binding.showKg.setText(null);
+            strWeight = String.valueOf(0);
+            binding.reCommand.setText(null);
         }
-
-        String strNewSum= String.valueOf(newSum);
-        Toast.makeText(this,strNewSum, Toast.LENGTH_SHORT).show();
-
     }
 
     private void setMessageBackground() {
