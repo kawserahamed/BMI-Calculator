@@ -1,7 +1,6 @@
 package com.example.bimapplication;
 
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 
@@ -63,7 +62,6 @@ public class MainActivity extends AppCompatActivity {
             totalWeight = 0;
             newSum = 0;
             strWeight = "";
-            binding.weightLose.setVisibility(View.GONE);
             binding.showKg.setVisibility(View.GONE);
 
             //Chart Background set null
@@ -139,7 +137,6 @@ public class MainActivity extends AppCompatActivity {
             sum = 0;
             newSum = 0;
             strWeight = "";
-            binding.weightLose.setVisibility(View.GONE);
             binding.showKg.setVisibility(View.GONE);
 
 
@@ -147,149 +144,62 @@ public class MainActivity extends AppCompatActivity {
             if (!heightCK && !weightCK) {
 
                 //height cm initialization
-                if (TextUtils.isEmpty(binding.heightIn.getText().toString())) {
-                    in = 0;
-                } else {
-                    in = Float.parseFloat(binding.heightIn.getText().toString());
-                }
-
-                if (TextUtils.isEmpty(binding.heightFt.getText().toString())) {
-                    binding.heightFt.setError("This Field Can't be Empty");
-                    binding.heightFt.requestFocus();
-                } else {
-                    fit = Integer.parseInt(binding.heightFt.getText().toString());
-                }
-
-                if (!TextUtils.isEmpty(binding.weightKg.getText().toString())) {
-                    weightKg = Float.parseFloat(binding.weightKg.getText().toString());
-                    totalWeight = weightKg;
-
-                } else {
-                    binding.weightKg.setError("This Field Can't be Empty or 0");
-                    binding.weightKg.requestFocus();
-                }
+                in = Float.parseFloat(binding.heightIn.getText().toString());
+                fit = Integer.parseInt(binding.heightFt.getText().toString());
+                weightKg = Float.parseFloat(binding.weightKg.getText().toString());
 
                 if (fit == 0 || weightKg == 0) {
-                    binding.heightFt.setError("Can't be 0");
-                    binding.weightKg.setError("Can't be 0");
+                    binding.heightFt.setError("This Field Can't be Empty or 0");
+                    binding.weightKg.setError("This Field Can't be Empty or 0");
+                    binding.weightKg.requestFocus();
                 } else {
                     totalMeter = (float) ((fit * 0.3048) + (in * 0.0254));
                     sum = totalWeight / (totalMeter * totalMeter);
-                    // dblVariable is a number variable and not a String in this case
                     binding.bmi.setText(precision.format(sum));
                 }
 
 
             } else if (heightCK && !weightCK) {
-
-                if (!TextUtils.isEmpty(binding.heightCm.getText().toString())) {
-                    heightCm = Float.parseFloat(binding.heightCm.getText().toString());
-                    totalMeter = heightCm / 100;
-
-                } else {
-                    binding.heightCm.setError("This Field Can't be Empty");
-                    binding.heightCm.requestFocus();
-                }
-
-                if (!TextUtils.isEmpty(binding.weightKg.getText().toString())) {
-                    weightKg = Float.parseFloat(binding.weightKg.getText().toString());
-                    totalWeight = weightKg;
-                } else {
-                    binding.weightKg.setError("This Field Can't be Empty");
-                    binding.weightKg.requestFocus();
-                }
+                heightCm = Float.parseFloat(binding.heightCm.getText().toString());
+                totalMeter = heightCm / 100;
+                weightKg = Float.parseFloat(binding.weightKg.getText().toString());
+                totalWeight = weightKg;
 
                 if (heightCm == 0 || weightKg == 0) {
-                    binding.weightKg.setError("Can't be 0");
-                    binding.heightCm.setError("Can't be 0");
-
+                    binding.weightKg.setError("This Field Can't be Empty or 0");
+                    binding.heightCm.setError("This Field Can't be Empty or 0");
                 } else {
                     sum = totalWeight / (totalMeter * totalMeter);
-                    // dblVariable is a number variable and not a String in this case
                     binding.bmi.setText(precision.format(sum));
                 }
 
 
             } else if (!heightCK && weightCK) {
 
-                if (TextUtils.isEmpty(binding.heightIn.getText().toString())) {
-                    in = 0;
-                } else {
-                    in = Float.parseFloat(binding.heightIn.getText().toString());
-                }
-
-                if (TextUtils.isEmpty(binding.heightFt.getText().toString())) {
-                    binding.heightFt.setError("This Field Can't be Empty");
-                    binding.heightFt.requestFocus();
-                } else {
-                    fit = Integer.parseInt(binding.heightFt.getText().toString());
-                }
-
-                if (!TextUtils.isEmpty(binding.weightLbs.getText().toString())) {
-                    weightLbs = Float.parseFloat(binding.weightLbs.getText().toString());
-                    totalWeight = (float) (weightLbs * 0.453592);
-                } else {
-                    binding.weightLbs.setError("This Field Can't be Empty");
-                    binding.weightLbs.requestFocus();
-                }
-
+                in = Float.parseFloat(binding.heightIn.getText().toString());
+                fit = Integer.parseInt(binding.heightFt.getText().toString());
+                weightLbs = Float.parseFloat(binding.weightLbs.getText().toString());
+                totalWeight = (float) (weightLbs * 0.453592);
                 if (fit == 0 || weightLbs == 0) {
-                    binding.weightLbs.setError("Can't be 0");
-                    binding.heightFt.setError("Can't be 0");
+                    binding.weightLbs.setError("This Field Can't be Empty or 0");
+                    binding.heightFt.setError("This Field Can't be Empty or 0");
                 } else {
                     sum = totalWeight / (totalMeter * totalMeter);
-                    binding.bmi.setText(precision.format(sum));
-                }
-
-
-            } else if (heightCK && !weightCK) {
-
-                if (TextUtils.isEmpty(binding.heightCm.getText().toString())) {
-                    binding.heightCm.setError("This Field Can't be Empty");
-                    binding.heightCm.requestFocus();
-                } else {
-                    heightCm = Float.parseFloat(binding.heightCm.getText().toString());
-                    totalMeter = heightCm / 100;
-                }
-
-                if (!TextUtils.isEmpty(binding.weightLbs.getText().toString())) {
-                    weightLbs = Float.parseFloat(binding.weightLbs.getText().toString());
-                    totalWeight = (float) (weightLbs * 0.453592);
-                } else {
-                    binding.weightLbs.setError("This Field Can't be Empty");
-                    binding.weightLbs.requestFocus();
-                }
-
-                if (heightCm == 0 || weightLbs == 0) {
-                    binding.heightCm.setError("Can't be 0");
-                    binding.weightLbs.setError("Can't be 0");
-                } else {
-                    sum = totalWeight / (totalMeter * totalMeter);
-                    // dblVariable is a number variable and not a String in this case
                     binding.bmi.setText(precision.format(sum));
                 }
 
 
             } else if (heightCK && weightCK) {
 
-                if (!TextUtils.isEmpty(binding.heightCm.getText().toString())) {
-                    heightCm = Float.parseFloat(binding.heightCm.getText().toString());
-                    totalMeter = heightCm / 100;
-                } else {
-                    binding.heightCm.setError("This Field Can't be Empty");
-                    binding.heightCm.requestFocus();
-                }
 
-                if (!TextUtils.isEmpty(binding.weightLbs.getText().toString())) {
-                    weightLbs = Float.parseFloat(binding.weightLbs.getText().toString());
-                    totalWeight = (float) (weightLbs * 0.453592);
-                } else {
-                    binding.weightLbs.setError("This Field Can't be Empty");
-                    binding.weightLbs.requestFocus();
-                }
+                heightCm = Float.parseFloat(binding.heightCm.getText().toString());
+                totalMeter = heightCm / 100;
+                weightLbs = Float.parseFloat(binding.weightLbs.getText().toString());
+                totalWeight = (float) (weightLbs * 0.453592);
+
                 if (heightCm == 0 || weightLbs == 0) {
-                    binding.heightCm.setError("Can't be 0");
-                    binding.weightLbs.setError("Can't be 0");
+                    binding.heightCm.setError("This Field Can't be Empty or 0");
+                    binding.weightLbs.setError("This Field Can't be Empty or 0");
 
                 } else {
                     sum = totalWeight / (totalMeter * totalMeter);
@@ -316,8 +226,8 @@ public class MainActivity extends AppCompatActivity {
                 newSum = newWeight / (totalMeter * totalMeter);
                 if (newSum >= 18.5) {
                     strWeight = String.valueOf(i);
-                    binding.weightNeed.setVisibility(View.VISIBLE);
-                    binding.showKg.setVisibility(View.VISIBLE);
+                    binding.weightNeed.setText(R.string.need_healthy);
+                    binding.showKg.setText(R.string.kg);
                     binding.reCommand.setText(strWeight);
                     break;
                 }
@@ -329,15 +239,14 @@ public class MainActivity extends AppCompatActivity {
                 newSum = newWeight / (totalMeter * totalMeter);
                 if (newSum <= 24.9) {
                     strWeight = String.valueOf(i);
-                    binding.weightLose.setVisibility(View.VISIBLE);
-                    binding.showKg.setVisibility(View.VISIBLE);
+                    binding.weightNeed.setText(R.string.lose_healthy);
+                    binding.showKg.setText(R.string.kg);
                     binding.reCommand.setText(strWeight);
                     break;
                 }
             }
         } else {
             binding.weightNeed.setText(null);
-            binding.weightLose.setText(null);
             binding.showKg.setText(null);
             strWeight = String.valueOf(0);
             binding.reCommand.setText(null);

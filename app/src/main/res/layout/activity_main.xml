@@ -327,17 +327,9 @@
                             android:id="@+id/weightNeed"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/need_healthy"
+                            android:text=""
                             android:textSize="12sp"
-                            android:visibility="gone" />
-
-                        <TextView
-                            android:id="@+id/weightLose"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/lose_healthy"
-                            android:textSize="12sp"
-                            android:visibility="gone" />
+                            android:visibility="visible" />
 
                         <TextView
                             android:id="@+id/reCommand"
@@ -351,9 +343,9 @@
                             android:id="@+id/showKg"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/kg"
+                            android:text=""
                             android:textSize="12sp"
-                            android:visibility="gone" />
+                            />
 
 
                     </LinearLayout>
