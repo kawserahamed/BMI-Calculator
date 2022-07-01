@@ -1,5 +1,5 @@
 # BMI-Calculator
-Introduction to Neumorphism  Stin Androidudio with BMI Calculator
+Introduction to Neumorphism in Android Studio with BMI Calculator
 Neumorphism is a design concept used to make soft widgets based on object shadows. It uses highlights and shadows to create elements that appear to be floating above the surface.
 In other words, the object seems to extrude from the background. Its aesthetic is made to implement actual Android components.
 
