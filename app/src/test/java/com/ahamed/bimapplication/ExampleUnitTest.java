@@ -1,4 +1,4 @@
-package com.example.bimapplication;
+package com.ahamed.bimapplication;
 
 import org.junit.Test;
 

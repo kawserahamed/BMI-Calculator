@@ -1,4 +1,4 @@
-package org.primeit.bmicalculator;
+package org.ahamed.bmicalculator;
 
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -7,8 +7,7 @@ import android.widget.AdapterView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-
-import org.primeit.bmicalculator.databinding.ActivityMainBinding;
+import org.ahamed.bmicalculator.databinding.ActivityMainBinding;
 
 import java.text.DecimalFormat;
 
@@ -34,13 +33,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setTheme(R.style.Theme_BIMApplication);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         spFt = binding.spinnerFit.getSelectedItem().toString();
-
         spKg = binding.spinnerKg.getSelectedItem().toString();
 
         DecimalFormat precision = new DecimalFormat("0.00");
@@ -203,7 +200,7 @@ public class MainActivity extends AppCompatActivity {
                         binding.bmi.setText(precision.format(sum));
                     }
                 }
-            } else if (!heightCK && !weightCK) {
+            } else if (!heightCK) {
 
                 String str_cm = binding.heightCm.getText().toString();
                 String str_lbs = binding.weightLbs.getText().toString();
@@ -231,7 +228,7 @@ public class MainActivity extends AppCompatActivity {
                         binding.bmi.setText(precision.format(sum));
                     }
                 }
-            } else if (heightCK && weightCK) {
+            } else {
                 String str_in = binding.heightIn.getText().toString();
                 String str_ft = binding.heightFt.getText().toString();
                 String str_kg = binding.weightKg.getText().toString();
@@ -331,7 +328,7 @@ public class MainActivity extends AppCompatActivity {
             binding.obeseClassIi.setBackgroundColor(getResources().getColor(R.color.Obese_Class_ii));
 
         } else if (sum >= 40.0) {
-            binding.comment.setText(R.string.obese_class_ii);
+            binding.comment.setText(R.string.obese_class_iii);
             binding.obeseClassIii.setBackgroundColor(getResources().getColor(R.color.Obese_Class_iii));
         }
     }
